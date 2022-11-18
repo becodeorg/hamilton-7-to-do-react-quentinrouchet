@@ -1,0 +1,35 @@
+.section-li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+h2 {
+    margin-top: 50px;
+}
+ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-left: -10px;
+    // width: 100%;
+    li {
+        background-color: white;
+        border-radius: 15px;
+        width: 400px;
+        height: 100px;
+        list-style-type: none;
+        margin: 15px 15px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+}
+
+@media (max-width: 570px){
+    ul {
+        width: 80%;
+        li{
+            width: 80%;
+        }
+    }
+}

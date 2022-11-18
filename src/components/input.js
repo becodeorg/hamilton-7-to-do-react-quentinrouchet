@@ -1,5 +1,7 @@
+import "../sass/components/input.scss"
+
 export default function Input () {
     return (
-        <input placeholder="Type a new todo"></input>
+        <input className="add-task" placeholder="Type a new todo"></input>
     )
 }

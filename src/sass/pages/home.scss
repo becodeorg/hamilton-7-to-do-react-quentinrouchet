@@ -1,0 +1,56 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // background: linear-gradient(45deg, #202441, #1D203F);
+    background-color: #00306F;
+    background-repeat: no-repeat;
+    height: 100vh;
+    color: #263238;
+    #root {
+            width: 90%;
+            height: 90%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            h1 {
+                justify-self: flex-start;
+                color: white;
+            }
+        section {
+            width: 90%;
+            height: 90%;
+            background: white;
+            // filter: blur(4px);
+            opacity: 0.9;
+            border-radius: 30px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+    }
+}
+
+.add-todo {
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+    margin-bottom: -10px;
+    width: 80%;
+    .add-task {
+        height: 60px;
+        width: 80%;
+        border:  2px solid #00306F;
+        border-radius: 10px 0 0 10px;
+    }
+    button {
+        background-color: #00306F;
+        border: none;
+        border-radius: 0 10px 10px 0;
+        padding: 0.5rem; 
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+    }
+}
