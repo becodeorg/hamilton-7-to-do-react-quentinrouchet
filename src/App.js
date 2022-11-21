@@ -10,7 +10,7 @@ export default function App() {
   return (
     <>
       <Title />
-      <section>
+      <section className="container">
         <div className='add-todo'>
           <Input />
           <Button />
