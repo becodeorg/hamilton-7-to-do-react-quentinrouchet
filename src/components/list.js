@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "../sass/components/list.scss";
 
 function Checkbox() {
@@ -17,31 +17,45 @@ function Checkbox() {
     );
 }
 
-export default function List() {
+export default function TodoList() {
+    // state
+    const initialTodos = ["My first todo", "My second todo"];
+    const [todos, setTodos] = useState(initialTodos);
 
-    //state
-    const [todos, setTodos] = useState([
-        {id: 1, task:"Salut React"},
-        {id: 2, task:"My second todo"},
-        {id: 3, task:"Salut React, je suis sur que t'es un vrai bro. Attends, je dois encore agrandir le texte. Et la c'est tjr pas finis mais on y est presque."},
-        {id: 4, task:"My second todo"},
-        {id: 5, task:"Salut React"},
-        {id: 6, task:"My second todo"}
-    ]);
+    const inputRef = useRef();
 
-    //comportement
+    // comportements
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        console.log(inputRef.current.value);
 
-    //render
+        // State copy
+        const todosCopy = [...todos];
+        const task = inputRef.current.value;
+        todosCopy.push(task);
+
+        // Push new element into the copy
+        setTodos(todosCopy)
+    };
+    
+    // render
     return (
-        <div className="section-li">
-            <h2>Todos</h2>
-            <ul>
-                {todos.map((todo) => {
-                    return <li key={todo.id}> 
-                        <Checkbox /><span className="taskHere">{todo.task}</span>
-                    </li>
-                })}
-            </ul>
-        </div>
+        <>
+            <form className="add-todo" action="submit" onSubmit={handleSubmit}>
+                <input ref={inputRef} type="text" className="add-task" placeholder="Type a new todo"></input>
+                <button>Add Todo</button>
+            </form>
+
+            <div className="section-li">
+                <h2>Todos</h2>
+                <ul>
+                    {todos.map((todo) => (
+                        <li key={todo}> 
+                            <Checkbox /><span className="taskHere">{todo}</span>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </>
     );
 }

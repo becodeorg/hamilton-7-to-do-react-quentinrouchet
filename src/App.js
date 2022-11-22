@@ -1,6 +1,5 @@
 import Title from './components/title.js';
-import Form from './components/form.js'
-import List from './components/list.js';
+import TodoList from './components/list.js'
 
 /* sass import */
 import "./sass/pages/home.scss"
@@ -10,8 +9,7 @@ export default function App() {
     <>
       <Title />
       <section className="container">
-        <Form />
-        <List />
+        <TodoList />
       </section>
     </>
   )
