@@ -1,11 +1,14 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
+import {v4 as uuidv4} from "uuid";
 import "../sass/components/list.scss";
+
+const LSKEY = "MyTodoApp";
 
 function Checkbox() {
     // State
     const [isActive, setIsActive] = useState(false);
 
-    // Comportement
+    // Comportement-
     const handleClick = event => {
         // 👇️ toggle isActive state on click
         setIsActive(current => !current);
@@ -19,25 +22,34 @@ function Checkbox() {
 
 export default function TodoList() {
     // state
-    const initialTodos = ["My first todo", "My second todo"];
-    const [todos, setTodos] = useState(initialTodos);
+    const [todos, setTodos] = useState([]);
 
     const inputRef = useRef();
 
     // comportements
     const handleSubmit = (event) => {
         event.preventDefault()
-        console.log(inputRef.current.value);
 
         // State copy
         const todosCopy = [...todos];
+
         const task = inputRef.current.value;
-        todosCopy.push(task);
+        todosCopy.push({id: uuidv4(), task: task});
 
         // Push new element into the copy
         setTodos(todosCopy)
     };
-    
+
+    useEffect(() => {
+        if (todos.length > 0) {localStorage.setItem(LSKEY + ".todos", JSON.stringify(todos))};
+    }, [todos]);
+
+    useEffect(() => {
+        const newList = JSON.parse(localStorage.getItem(LSKEY + ".todos"))
+        setTodos(newList);
+    }, []);
+
+
     // render
     return (
         <>
@@ -50,8 +62,8 @@ export default function TodoList() {
                 <h2>Todos</h2>
                 <ul>
                     {todos.map((todo) => (
-                        <li key={todo}> 
-                            <Checkbox /><span className="taskHere">{todo}</span>
+                        <li key={todo.id}> 
+                            <Checkbox /><span className="taskHere">{todo.task}</span>
                         </li>
                     ))}
                 </ul>
