@@ -40,17 +40,20 @@ export default function TodoList() {
         setTodos(todosCopy)
     };
 
-    useEffect(() => {
-        if (todos.length > 0) {localStorage.setItem(LSKEY + ".todos", JSON.stringify(todos))};
-    }, [todos]);
 
     useEffect(() => {
-        const newList = JSON.parse(localStorage.getItem(LSKEY + ".todos"))
-        setTodos(newList);
-    }, []);
-
+        if (todos.length > 0) localStorage.setItem(LSKEY, JSON.stringify(todos));
+      }, [todos]); // <<- look here
+    
+      useEffect(() => {
+        if (localStorage.getItem(LSKEY)) {
+          const newList = JSON.parse(localStorage.getItem(LSKEY));
+          setTodos(newList);
+        }
+      }, []);
 
     // render
+
     return (
         <>
             <form className="add-todo" action="submit" onSubmit={handleSubmit}>
